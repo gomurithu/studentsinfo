@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 use App\Models\Student;
 
@@ -9,7 +9,7 @@ class StudentController extends Controller
 {
    
 
-    public function create()
+    public function index()
     {
         return view('add.student');
     }
@@ -20,6 +20,7 @@ class StudentController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
+            'address'=>'required',
             
         ]);
 
@@ -30,36 +31,36 @@ class StudentController extends Controller
     }
 
    
-    public function edit($id)
-    {
-        $student = Student::findOrFail($id);
-        return view('edit.student', compact('student'));
-    }
+    // public function edit($id)
+    // {
+    //     $student = Student::findOrFail($id);
+    //     return view('edit.student', compact('student'));
+    // }
 
     
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required',
-            'age' => 'required|integer',
-            'grade' => 'required'
-        ]);
+    // public function update(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'age' => 'required|integer',
+    //         'grade' => 'required'
+    //     ]);
 
-        $student = Student::findOrFail($id);
-        $student->update($request->all());
+    //     $student = Student::findOrFail($id);
+    //     $student->update($request->all());
 
-        return redirect()->route('update.student')
-                         ->with('success', 'Student updated successfully.');
-    }
+    //     return redirect()->route('update.student')
+    //                      ->with('success', 'Student updated successfully.');
+    // }
 
     
-    public function delete($id)
-    {
-        $student = Student::findOrFail($id);
-        $student->delete();
+    // public function delete($id)
+    // {
+    //     $student = Student::findOrFail($id);
+    //     $student->delete();
 
-        return redirect()->route('delete.student')
-                         ->with('success', 'Student deleted successfully.');
-    }
+    //     return redirect()->route('delete.student')
+    //                      ->with('success', 'Student deleted successfully.');
+    // }
 }
 
